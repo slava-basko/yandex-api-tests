@@ -1,0 +1,18 @@
+{
+    "name": "slava-basko/yandex-api-tests",
+    "description": "Tests for yandex SDK",
+    "authors": [
+        {
+            "name": "Slava Basko",
+            "email": "basko.slava@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yandex\\Tests\\": "tests/"
+        }
+    }
+}
