@@ -4,7 +4,7 @@
  * Date: 9/27/16
  */
 
-namespace Yandex\Tests\Auth;
+namespace Yandex\Tests\Core\Auth;
 
 use Yandex\Auth\Token;
 
