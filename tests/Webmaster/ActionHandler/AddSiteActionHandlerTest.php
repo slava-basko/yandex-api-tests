@@ -21,7 +21,7 @@ class AddSiteActionHandlerTest extends \PHPUnit_Framework_TestCase
             '{"error_code": "HOST_ALREADY_ADDED","host_id": "http:ya.ru:80","verified": false,"error_message": "explicit error message"}'
         );
         $handler = new AddSiteActionHandler();
-        $this->expectException(CanNotAddSiteException::class);
+        $this->setExpectedException(CanNotAddSiteException::class);
         $handler->handle($response);
     }
 
@@ -29,7 +29,7 @@ class AddSiteActionHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $response = new Response(201, [], '{"asd": "zxc"}');
         $handler = new AddSiteActionHandler();
-        $this->expectException(BadResponseException::class);
+        $this->setExpectedException(BadResponseException::class);
         $handler->handle($response);
     }
 }

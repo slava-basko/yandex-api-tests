@@ -27,7 +27,7 @@ class AddSitemapActionHandlerTest extends \PHPUnit_Framework_TestCase
             '{"error_code": "HOST_NOT_FOUND","host_id": "http:ya.ru:80","error_message": "explicit error message"}'
         );
         $handler = new AddSitemapActionHandler();
-        $this->expectException(NotFoundException::class);
+        $this->setExpectedException(NotFoundException::class);
         $handler->handle($response);
     }
 }

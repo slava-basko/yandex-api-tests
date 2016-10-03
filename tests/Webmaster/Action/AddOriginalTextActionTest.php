@@ -19,7 +19,7 @@ class AddOriginalTextActionTest extends \PHPUnit_Framework_TestCase
          */
         $user = $GLOBALS['webmaster_user'];
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->setExpectedException(\InvalidArgumentException::class);
         new AddOriginalTextAction($user, 'http:example.com', 'qweqwe');
     }
 
@@ -35,7 +35,7 @@ class AddOriginalTextActionTest extends \PHPUnit_Framework_TestCase
             $content .= 'a';
         }
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->setExpectedException(\InvalidArgumentException::class);
         new AddOriginalTextAction($user, 'http:example.com', $content);
     }
 

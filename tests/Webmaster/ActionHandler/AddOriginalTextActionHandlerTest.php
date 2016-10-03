@@ -17,14 +17,14 @@ class AddOriginalTextActionHandlerTest extends \PHPUnit_Framework_TestCase
     public function test_errors()
     {
         $handler = new AddOriginalTextActionHandler();
-        $this->expectException(ForbiddenException::class);
+        $this->setExpectedException(ForbiddenException::class);
         $handler->handle(new Response(403, [], ''));
     }
 
     public function test_errors2()
     {
         $handler = new AddOriginalTextActionHandler();
-        $this->expectException(TooManyRequestsException::class);
+        $this->setExpectedException(TooManyRequestsException::class);
         $handler->handle(new Response(429, [], ''));
     }
 

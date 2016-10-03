@@ -23,7 +23,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
     public function test_invalid_json()
     {
-        $this->expectException(JsonException::class);
+        $this->setExpectedException(JsonException::class);
         Json::decode('{"qwe":asd"}');
     }
 }

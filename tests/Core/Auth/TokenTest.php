@@ -14,7 +14,7 @@ class TokenTest extends \PHPUnit_Framework_TestCase
 
     public function test_token_creation()
     {
-        $this->expectException('\InvalidArgumentException');
+        $this->setExpectedException(\InvalidArgumentException::class);
         new Token(123);
     }
 

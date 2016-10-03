@@ -30,15 +30,15 @@ namespace Yandex\Tests\Core\Http {
     {
         public function test_create_instance_with_invalid_url()
         {
-            $this->expectException('\InvalidArgumentException');
+            $this->setExpectedException('\InvalidArgumentException');
             new Client('asd', 'qwe', 'zxc', new Curl());
         }
 
         public function test_client_with_unsupported_action()
         {
-            $action = $this->createMock(ActionInterface::class);
+            $action = $this->getMock(ActionInterface::class);
             $client = new Client('http://example/com', 'qwe', 'zxc', new Curl());
-            $this->expectException(UnsupportedActionException::class);
+            $this->setExpectedException(UnsupportedActionException::class);
             $client->call($action);
         }
 
@@ -46,7 +46,7 @@ namespace Yandex\Tests\Core\Http {
         {
             $token = new Token('qwe-asd');
 
-            $action = $this->createMock(ActionInterface::class);
+            $action = $this->getMock(ActionInterface::class);
             $action->expects($this->once())
                 ->method('getHttpMethod')
                 ->willReturn('get');
@@ -57,9 +57,9 @@ namespace Yandex\Tests\Core\Http {
                 ->method('getToken')
                 ->willReturn($token);
 
-            $actionHandler = $this->createMock(ActionHandlerInterface::class);
+            $actionHandler = $this->getMock(ActionHandlerInterface::class);
 
-            $curl = $this->createMock(CurlInterface::class);
+            $curl = $this->getMock(CurlInterface::class);
             $curl->expects($this->once())
                 ->method('init')
                 ->willReturn(null);
@@ -76,7 +76,7 @@ namespace Yandex\Tests\Core\Http {
             $client = new Client('http://example.com', 'qwe', 'asd', $curl);
             $client->addActionHandler(get_class($action), get_class($actionHandler));
 
-            $this->expectException(\Exception::class);
+            $this->setExpectedException(\Exception::class);
             $client->call($action);
         }
 
@@ -84,7 +84,7 @@ namespace Yandex\Tests\Core\Http {
         {
             $token = new Token('qwe-asd');
 
-            $action = $this->createMock(ActionInterface::class);
+            $action = $this->getMock(ActionInterface::class);
             $action->expects($this->once())
                 ->method('getHttpMethod')
                 ->willReturn('get');
@@ -95,7 +95,7 @@ namespace Yandex\Tests\Core\Http {
                 ->method('getToken')
                 ->willReturn($token);
 
-            $curl = $this->createMock(CurlInterface::class);
+            $curl = $this->getMock(CurlInterface::class);
             $curl->expects($this->once())
                 ->method('init')
                 ->willReturn(null);

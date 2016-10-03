@@ -23,7 +23,7 @@ class DeleteSiteActionHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $response = new Response(404, [], '{"error_code": "HOST_NOT_FOUND","host_id": "http:ya.ru:80","error_message": "explicit error message"}');
         $handler = new DeleteSiteActionHandler();
-        $this->expectException(CanNotDeleteSiteException::class);
+        $this->setExpectedException(CanNotDeleteSiteException::class);
         $handler->handle($response);
     }
 }

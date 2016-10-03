@@ -32,7 +32,7 @@ class VerifySiteActionTest extends \PHPUnit_Framework_TestCase
          */
         $user = $GLOBALS['webmaster_user'];
 
-        $this->expectException('\InvalidArgumentException');
+        $this->setExpectedException('\InvalidArgumentException');
         new VerifySiteAction($user, 'http:example.com:80', 'QWE');
     }
 }

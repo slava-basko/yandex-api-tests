@@ -31,7 +31,7 @@ class DeleteSitemapActionHandlerTest extends \PHPUnit_Framework_TestCase
 }'
         );
         $handler = new DeleteSitemapActionHandler();
-        $this->expectException(ForbiddenException::class);
+        $this->setExpectedException(ForbiddenException::class);
         $handler->handle($response);
     }
 }

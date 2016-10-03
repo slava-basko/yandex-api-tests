@@ -51,7 +51,7 @@ class GetListOfSitesHandlerTest extends \PHPUnit_Framework_TestCase
             '{"error_code": "INVALID_USER_ID","available_user_id": 1,"error_message": "Invalid user id. {user_id} should be used."}'
         );
         $handler = new GetListOfSitesHandler();
-        $this->expectException(YandexException::class);
+        $this->setExpectedException(YandexException::class);
         $handler->handle($response);
     }
 }
