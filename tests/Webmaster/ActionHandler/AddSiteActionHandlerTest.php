@@ -7,6 +7,7 @@
 namespace Yandex\Tests\Webmaster\ActionHandler;
 
 use Yandex\Exception\BadResponseException;
+use Yandex\Exception\ConflictException;
 use Yandex\Http\Response;
 use YandexWebmaster\ActionHandler\AddSiteActionHandler;
 use YandexWebmaster\Exception\CanNotAddSiteException;
@@ -21,7 +22,7 @@ class AddSiteActionHandlerTest extends \PHPUnit_Framework_TestCase
             '{"error_code": "HOST_ALREADY_ADDED","host_id": "http:ya.ru:80","verified": false,"error_message": "explicit error message"}'
         );
         $handler = new AddSiteActionHandler();
-        $this->setExpectedException(CanNotAddSiteException::class);
+        $this->setExpectedException(ConflictException::class);
         $handler->handle($response);
     }
 
