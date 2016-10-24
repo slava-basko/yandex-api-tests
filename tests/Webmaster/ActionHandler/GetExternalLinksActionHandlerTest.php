@@ -45,6 +45,7 @@ class GetExternalLinksActionHandlerTest extends \PHPUnit_Framework_TestCase
         $linksCollection = $handler->handle($response);
 
         $this->assertEquals(1, $linksCollection->count());
+        $this->assertEquals(1, $linksCollection->getTotal());
         $this->assertEquals('example.com', $linksCollection->getLinks()[0]->getSourceUrl());
     }
 }
