@@ -3,8 +3,8 @@
  * Created by Slava Basko <basko.slava@gmail.com>
  * Date: 9/27/16
  */
-namespace Yandex\Tests\Core\Http;
 
+use Psr\Log\NullLogger;
 use Yandex\Action\ActionInterface;
 use Yandex\ActionHandler\ActionHandlerInterface;
 use Yandex\Auth\Token;
@@ -12,19 +12,20 @@ use Yandex\Exception\UnsupportedActionException;
 use Yandex\Http\Client;
 use Yandex\Http\Curl;
 use Yandex\Http\CurlInterface;
+use Yandex\Http\LoggableClient;
 
-class ClientTest extends \PHPUnit_Framework_TestCase
+class LoggableClientTest extends \PHPUnit_Framework_TestCase
 {
     public function test_create_instance_with_invalid_url()
     {
         $this->setExpectedException('\InvalidArgumentException');
-        new Client('asd', 'qwe', 'zxc', new Curl());
+        new LoggableClient('asd', 'qwe', 'zxc', new Curl(), new NullLogger());
     }
 
     public function test_client_with_unsupported_action()
     {
         $action = $this->getMock(ActionInterface::class);
-        $client = new Client('http://example/com', 'qwe', 'zxc', new Curl());
+        $client = new LoggableClient('http://example/com', 'qwe', 'zxc', new Curl(), new NullLogger());
         $this->setExpectedException(UnsupportedActionException::class);
         $client->call($action);
     }
@@ -37,7 +38,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $action->expects($this->once())
             ->method('getHttpMethod')
             ->willReturn('get');
-        $action->expects($this->once())
+        $action->expects($this->exactly(2))
             ->method('getUrl')
             ->willReturn('/');
         $action->expects($this->once())
@@ -60,7 +61,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->method('exec')
             ->willReturn(false);
 
-        $client = new Client('http://example.com', 'qwe', 'asd', $curl);
+        $client = new LoggableClient('http://example.com', 'qwe', 'asd', $curl, new NullLogger());
         $client->addActionHandler(get_class($action), get_class($actionHandler));
 
         $this->setExpectedException(\Exception::class);
@@ -75,7 +76,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $action->expects($this->once())
             ->method('getHttpMethod')
             ->willReturn('get');
-        $action->expects($this->once())
+        $action->expects($this->exactly(2))
             ->method('getUrl')
             ->willReturn('/');
         $action->expects($this->once())
@@ -99,7 +100,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->method('close')
             ->willReturn(null);
 
-        $client = new Client('http://example.com', 'qwe', 'asd', $curl);
+        $client = new LoggableClient('http://example.com', 'qwe', 'asd', $curl, new NullLogger());
         $client->addActionHandler(get_class($action), \MockHandler::class);
 
         $this->assertEquals(1, $client->call($action));
