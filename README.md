@@ -16,9 +16,6 @@ Create "phpunit.xml"
         <whitelist>
             <directory>vendor/slava-basko/yandex-api-core/src</directory>
             <directory>vendor/slava-basko/yandex-api-webmaster/src</directory>
-            <exclude>
-                <file>vendor/slava-basko/yandex-api-core/src/Http/Curl.php</file>
-            </exclude>
         </whitelist>
     </filter>
 
